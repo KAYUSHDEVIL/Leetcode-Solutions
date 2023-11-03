@@ -1,0 +1,24 @@
+class Solution {
+public:
+vector buildArray(vector& target, int n) { int cnt=0;
+vectorsol;
+map<int, bool>mp;
+for(int I=0;I<target.size() ;I++) {
+mp[target [I]]=true;
+}
+for(int I=0;I<n;I++) {
+if(cnt==target.size() ) {
+return sol;
+}
+if(mp[I+1]==true) {
+sol. push_back("Push") ;
+cnt++;
+}
+else{
+sol. push_back("Push") ;
+sol. push_back("Pop");
+}
+}
+return sol;
+}
+};
