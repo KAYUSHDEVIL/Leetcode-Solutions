@@ -1,0 +1,54 @@
+class Solution{   
+public:
+    string printMinNumberForPattern(string S){
+        // code here 
+        string ans="";
+        int n=S.size(),maxy;
+        vector<int>v(n+1,-1);
+        v[0]=1;
+        for(int i=0;i<n;i++){
+            if(S[i]=='I'&&i==n-1){
+                v[i+1]=0;
+            }
+            else if(S[i]=='I'){
+                int j=i+1,cnt=0;
+                while(S[j]=='D'){
+                    cnt++;
+                    j++;
+                }
+                v[i+1]=cnt;
+                i=j-1;
+            }
+            else if(S[i]=='D'&&i==0){
+                int j=0,cnt=0;
+                while(S[j]=='D'){
+                    cnt++;
+                    j++;
+                }
+                v[0]=cnt;
+                i=cnt-1;
+            }
+            else if(S[i]=='D'&&i==n-1){
+                continue;
+            }
+        }
+        (S[0]=='D') ? maxy=0 : maxy=1;
+            for(int i=maxy;i<v.size();i++){
+            if(v[i]==-1){
+                v[i]=v[i-1]+v[i];
+            }
+            else if(v[i]==0){
+                v[i]=maxy+1;
+                maxy=maxy+1;
+            }
+            else{
+                v[i]=v[i]+1+maxy;
+                maxy=v[i];
+            }
+          }
+        for(int i=0;i<v.size();i++){
+            ans+= to_string(v[i]);
+        }
+        return ans;
+    }
+};
