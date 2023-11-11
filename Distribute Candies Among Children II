@@ -1,0 +1,20 @@
+
+class Solution {
+public:
+    long long distributeCandies(int n, int limit) {
+        auto  calculateCombinations = [](int n) {
+            return 1LL * n * (n - 1) / 2;
+        };
+        long long waysToDistribute =  calculateCombinations(n + 2);
+        if (3 * limit<n) {
+            return 0;
+        }
+        if (limit<n) {
+            waysToDistribute =waysToDistribute - 3 *  calculateCombinations(n - limit + 1);
+        }
+        if (2 * limit<=n-2) {
+            waysToDistribute =waysToDistribute + 3 *  calculateCombinations(n - 2 * limit);
+        }
+        return waysToDistribute;
+    }
+};
