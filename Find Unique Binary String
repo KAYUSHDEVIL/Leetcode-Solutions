@@ -1,0 +1,36 @@
+class Solution {
+public:
+   string findDifferentBinaryString(vector<string>& nums) {
+        int n = nums.size(), s = nums[0].size(), ans = 0, i = 0,limit = pow(2, s);
+        vector<int> v(32);
+        map<int, bool> mp;
+        string result;
+        for (int i = 0; i < n; i++) {
+            int powe = 0, num = 0;
+            for (int j = s - 1; j >= 0; j--) {
+                num = num + pow(2, powe) * (nums[i][j] - '0');
+                powe++;
+            }
+            mp[num] = true;
+        }
+        for (int i = 0; i <= limit; i++) {
+            if (mp[i] != 1) {
+                ans = i;
+                break;
+            }
+        }
+        while (ans > 0) {
+            v[i] = ans % 2;
+            ans = ans / 2;
+            i++;
+        }
+        for (int j = i; j < s; j++) {
+            result += '0';
+        }
+        for (int j = i - 1; j >= 0; j--) {
+            result += std::to_string(v[j]);
+        }
+
+        return result;
+    }
+};
