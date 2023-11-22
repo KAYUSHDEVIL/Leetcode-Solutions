@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
+        vector<int> ans;
+        map<int, vector<int>> mp;
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = 0; j < nums[i].size(); j++) {
+                mp[i + j].push_back(nums[i][j]);
+            }
+        }
+        for (auto pair : mp) {
+//New Thing How To Reverse map of vector
+            reverse(pair.second.begin(), pair.second.end()); 
+            for (auto val : pair.second) {
+                ans.push_back(val);
+            }
+        }
+        return ans;
+    }
+};
